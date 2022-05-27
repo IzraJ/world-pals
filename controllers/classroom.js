@@ -45,7 +45,7 @@ module.exports = {
     getClassroomProfile: async (req, res) => {
         try {
           console.log(req.params.id)
-        const posts = await Post.find({classroomId:req.params.id});
+        const posts = await Post.find({classroomId:req.params.id}).sort({ createdAt: "desc" }).lean();;;
         const addedStudents = await User.find({classroomid:req.params.id})
         const classroom = await Classroom.find({_id: req.params.id})
         const students = await User.find({teacherid: req.user.id})

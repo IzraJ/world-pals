@@ -1,7 +1,7 @@
-<%- include('partials/header') -%>
+<%- include('partials/headerLoggedIn') -%>
 
  
-<main class="flex flex-wrap">
+
         <div class="col 1">
           <h2>List of Students</h2>
             <% for(var i=0; i<students.length; i++) {%>
@@ -19,6 +19,8 @@
 
             <% } %>
         </div>
+
+
         <!-- List of Students in this Class -->
         <div class="col 1">
           <h2>List of Students In This Class</h2>
@@ -31,34 +33,41 @@
 
             <% } %>
         </div>
-      </main>
 
 
-
-      <!-- Thisis the feed code below. Need to edit it so it shows classroom specific posts -->
-
-      <div class="grid-flow-col justify-center">
-        <% for(var i=0; i<posts.length; i++) {%>
-        <div class="card w-96 bg-base-100 shadow-xl">
-          <a href="/profile/<%= posts[i].user%>"><%= posts[i].userName%></a>
-          <figure class="px-10 pt-10">
-            <a href="/post/<%= posts[i]._id%>">
-            <img src="<%= posts[i].image%>" alt="Shoes" class="rounded-xl" />
-          </a>
-          </figure>
-          <div class="card-body items-center text-center">
-            <h2 class="card-title"><%= posts[i].title%></h2>
-            <p class="truncate ..."><%= posts[i].caption%></p>
-            <div class="card-actions">
-              <button class="btn btn-primary">Comment</button>
+        <div class="grid-flow-col justify-center">
+          <% for(var i=0; i<posts.length; i++) {%>
+          <div class="card w-96 bg-base-100 shadow-xl">
+            <a href="/profile/<%= posts[i].user%>"><%= posts[i].userName%></a>
+            <figure class="px-10 pt-10">
+              <a href="/post/<%= posts[i]._id%>">
+              <img src="<%= posts[i].image%>" alt="Shoes" class="rounded-xl" />
+            </a>
+            </figure>
+            <div class="card-body items-center text-center">
+              <h2 class="card-title"><%= posts[i].title%></h2>
+              <p class="truncate ..."><%= posts[i].caption%></p>
+              <div class="card-actions">
+                <button class="btn btn-primary">Comment</button>
+              </div>
             </div>
           </div>
-        </div>
-        <% } %>
-        
+          <% } %>
+          </div>
         </div>
 
-        <div class="dropdown">
+
+
+
+     
+
+
+
+      
+
+      
+
+        <!-- <div class="dropdown">
           <label tabindex="0" class="btn m-1">Click</label>
           <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
             <% for(var i=0; i<addedStudents.length; i++) {%>
@@ -71,4 +80,4 @@
           <% } %>
             
           </ul>
-        </div>
+        </div> -->

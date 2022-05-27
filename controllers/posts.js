@@ -9,32 +9,31 @@ module.exports = {
   getProfile: async (req, res) => {
     try {
       if(req.user.student == true){
-        const posts = await Post.find({ user: req.user.id });
-      res.render("profileStudents.ejs",{ posts: posts, user: req.user})
-      }
+        const classroom = await Classroom.findById(req.user.classroomid)
+        const posts = await Post.find({ classroomId: req.user.classroomid }).sort({ createdAt: "desc" }).lean();;
+        // const posts = await Post.find({ user: req.user.id });
+      res.render("profileStudents.ejs",{ posts: posts, user: req.user,classroom:classroom})
+      } else {
       const friends = await User.find().populate('friends');
       const classroom = await User.find({class: req.user.id})
       const students = await User.find({teacherid: req.user.id})
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
       res.render("profile.ejs",{ posts: posts, user: req.user, students: students, classroom: classroom, friends: friends})
+      }
     } catch (err) {
       console.log(err);
     }
   },
 
-  getProfileStudents: async (req, res) => {
-    try {
+  // getProfileStudents: async (req, res) => {
+  //   try {
       
-      
-      const classroom = await Classroom.findById(req.user.classroomid)
-      const posts = await Post.find({ classroomId: req.user.classroomid });
-      res.render("profileStudents.ejs",{ posts: posts, user: req.user, classroom: classroom})
-    } catch (err) {
-      
-      console.log(err);
-    
-    }
-  },
+  //     const posts = await Post.find({ classroomId: req.user.classroomid });
+  //     res.render("profileStudents.ejs",{ posts: posts, user: req.user, classroom: classroom})
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
 
   getProfileOthers: async (req,res) => {
     try{
@@ -49,6 +48,7 @@ module.exports = {
 
   getFeed: async (req, res) => {
     try {
+      
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
       res.render("feed.ejs", { posts: posts });
     } catch (err) {

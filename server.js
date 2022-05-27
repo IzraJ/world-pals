@@ -66,7 +66,16 @@ app.use("/classroom",classroomRoutes)
 
 
 
-// app.use("/comment", commentRoutes)
+
+
+
+
+
+
+
+
+
+
 
 //Server Running
 app.listen(process.env.PORT, () => {
