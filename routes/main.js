@@ -1,0 +1,30 @@
+const express = require("express")
+const router = express.Router()
+const authController = require("../controllers/auth")
+const homeController = require("../controllers/home")
+const profileController = require("../controllers/profile")
+
+const { ensureAuth, ensureGuest} = require("../middleware/auth")
+
+// Main Routes
+router.get("/", homeController.getIndex);
+// Teacher Profile
+router.get("/profile", ensureAuth, profileController.getProfile);
+// Login Teacher
+router.get("/login", authController.getLogin);
+router.post("/login", authController.postLogin);
+// Login Students
+router.get("/loginStudent", authController.getLoginStudent);
+router.post("/loginStudent", authController.postLoginStudent);
+// Signup Page Option Teacher or Student
+router.get("/signup", authController.getSignup);
+// Signup Teacher
+router.get("/signupTeacher", authController.getSignupTeacher);
+router.post("/signupTeacher", authController.postSignupTeacher);
+// Signup Student
+router.get("/signupStudent", authController.getSignupStudent);
+router.post("/signupStudent", authController.postSignupStudent);
+// Logout
+router.get("/logout", authController.logout);
+
+module.exports = router;
