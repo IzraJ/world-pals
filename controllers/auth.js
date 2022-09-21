@@ -119,9 +119,7 @@ exports.getSignupTeacher = (req, res) => {
 };
 
 exports.getSignupStudent = (req, res) => {
-  if (req.user) {
-    return res.redirect("/profile");
-  }
+  
   res.render("signupStudent", {
     title: "Create Account",
   });
@@ -192,7 +190,7 @@ exports.postSignupStudent = (req, res, next) => {
 
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
-    return res.redirect("../signup");
+    return res.redirect("../signupStudent");
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
@@ -215,18 +213,19 @@ exports.postSignupStudent = (req, res, next) => {
         req.flash("errors", {
           msg: "Account with that email address or username already exists.",
         });
-        return res.redirect("../signup");
+        return res.redirect("../signupStudent");
       }
       user.save((err) => {
         if (err) {
           return next(err);
         }
-        req.logIn(user, (err) => {
-          if (err) {
-            return next(err);
-          }
-          res.redirect("/profile");
-        });
+        res.redirect("/profile")
+        // req.logIn(user, (err) => {
+        //   if (err) {
+        //     return next(err);
+        //   }
+        //   res.redirect("/profile");
+        // });
       });
     }
   );
