@@ -1,6 +1,7 @@
 // const cloudinary = require("../middleware/cloudinary");
 // const Post = require("../models/Post");
 // const Comment = require("../models/Comment")
+const Student = require("../models/UserStudent")
 
 // module.exports = {
 //   getProfile: async (req, res) => {
@@ -81,8 +82,8 @@
 module.exports = {
     getProfile: async (req, res) => {
             try {
-            
-              res.render("profile.ejs",{user: req.user})
+              const students = await Student.find({teacherid: req.user.id})
+              res.render("profile.ejs",{students: students, user: req.user})
             } catch (err) {
               console.log(err);
             }

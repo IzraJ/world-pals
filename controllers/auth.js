@@ -138,7 +138,7 @@ exports.postSignupTeacher = (req, res, next) => {
 
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
-    return res.redirect("../signup");
+    return res.redirect("../signupTeacher");
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
@@ -200,7 +200,8 @@ exports.postSignupStudent = (req, res, next) => {
     userName: req.body.userName,
     email: req.body.email,
     password: req.body.password,
-    student: true
+    student: true,
+    teacherid: req.user.id
   });
 
   UserStudent.findOne(

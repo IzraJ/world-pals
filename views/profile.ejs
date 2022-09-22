@@ -13,7 +13,12 @@
     <div class="row mt-5">
         <div class="col-6">
             <div>
-                <h2>Add Students</h2>
+                <h2>Students</h2>
+                <% for(var i=0; i<students.length; i++) {%>
+                    <li class="col-6 justify-content-between ">
+                        <%= students[i].userName%>
+                    </li>
+                  <% } %>
                 <a href="/signupStudent" class="col-3 btn btn-primary"> Add student</a>
             </div>
         </div>
