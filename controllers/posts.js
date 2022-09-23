@@ -6,6 +6,10 @@ const User = require("../models/User")
 module.exports = {
   getProfile: async (req, res) => {
     try {
+      if(req.user.student == true){
+        const posts = await Post.find({ user: req.user.id });
+      res.render("profileStudents.ejs",{ posts: posts, user: req.user})
+      }
       const students = await User.find({teacherid: req.user.id})
       const posts = await Post.find({ user: req.user.id });
       res.render("profile.ejs",{ posts: posts, user: req.user, students: students})
