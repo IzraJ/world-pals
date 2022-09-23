@@ -8,15 +8,21 @@ module.exports = {
     try {
       const students = await User.find({teacherid: req.user.id})
       const posts = await Post.find({ user: req.user.id });
-      if(req.user.student){
-      res.render("profileStudent.ejs", { posts: posts, user: req.user })
-    }else{
       res.render("profile.ejs",{ posts: posts, user: req.user, students: students})
-    }
     } catch (err) {
       console.log(err);
     }
   },
+  getProfileStudents: async (req, res) => {
+    try {
+      const posts = await Post.find({ user: req.user.id });
+      res.render("profileStudents.ejs",{ posts: posts, user: req.user})
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  
 
   getFeed: async (req, res) => {
     try {
