@@ -18,6 +18,7 @@ module.exports = function (passport) {
               "Your account was registered using a sign-in provider. To enable password login, sign in using a provider, and then set a password under your user profile.",
           });
         }
+        
         user.comparePassword(password, (err, isMatch) => {
           if (err) {
             return done(err);
@@ -29,7 +30,10 @@ module.exports = function (passport) {
         });
       });
     })
+    
   );
+  
+  
 
   passport.serializeUser((user, done) => {
     done(null, user.id);
@@ -38,4 +42,5 @@ module.exports = function (passport) {
   passport.deserializeUser((id, done) => {
     User.findById(id, (err, user) => done(err, user));
   });
+  
 };

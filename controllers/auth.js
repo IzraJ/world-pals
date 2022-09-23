@@ -1,7 +1,7 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
-const UserStudent = require("../models/UserStudent")
+
 
 exports.getLogin = (req, res) => {
   if (req.user) {
@@ -14,7 +14,7 @@ exports.getLogin = (req, res) => {
 
 exports.getLoginStudent = (req, res) => {
   if (req.user) {
-    return res.redirect("/profile");
+    return res.redirect("/profileStudents");
   }
   res.render("loginStudent", {
     title: "LoginStudent",
@@ -63,7 +63,7 @@ exports.postLoginStudent = (req, res, next) => {
 
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
-    return res.redirect("/login");
+    return res.redirect("/loginStudent");
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
@@ -75,14 +75,14 @@ exports.postLoginStudent = (req, res, next) => {
     }
     if (!user) {
       req.flash("errors", info);
-      return res.redirect("/login");
+      return res.redirect("/loginStudent");
     }
     req.logIn(user, (err) => {
       if (err) {
         return next(err);
       }
       req.flash("success", { msg: "Success! You are logged in." });
-      res.redirect(req.session.returnTo || "/profile");
+      res.redirect(req.session.returnTo || "/profileStudents");
     });
   })(req, res, next);
 };
@@ -148,6 +148,8 @@ exports.postSignupTeacher = (req, res, next) => {
     userName: req.body.userName,
     email: req.body.email,
     password: req.body.password,
+    student: false,
+    teacherid: null
   });
 
   User.findOne(
@@ -196,7 +198,7 @@ exports.postSignupStudent = (req, res, next) => {
     gmail_remove_dots: false,
   });
 
-  const user = new UserStudent({
+  const user = new User({
     userName: req.body.userName,
     email: req.body.email,
     password: req.body.password,
@@ -204,7 +206,7 @@ exports.postSignupStudent = (req, res, next) => {
     teacherid: req.user.id
   });
 
-  UserStudent.findOne(
+  User.findOne(
     { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
     (err, existingUser) => {
       if (err) {
@@ -221,6 +223,7 @@ exports.postSignupStudent = (req, res, next) => {
           return next(err);
         }
         res.redirect("/profile")
+        // commenting this out works sometimes
         // req.logIn(user, (err) => {
         //   if (err) {
         //     return next(err);
