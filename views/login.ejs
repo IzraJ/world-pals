@@ -1,40 +1,51 @@
 <%- include('partials/header') -%>
 
-<main class="container">
-  <div class="row justify-content-center">
-    <section class="col-6 mt-5">
+<div class="">
+ 
+    <section class="">
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
-      <div class="alert alert-danger"><%= el.msg %></div>
+      <div class="alert alert-warning shadow-lg">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+          <span><%= el.msg %></span>
+        </div>
+      </div>
       <% }) %> <% } %> <% if (locals.messages.info) { %> <%
       messages.info.forEach( el => { %>
-      <div class="alert alert-info"><%= el.msg %></div>
+      <div class="alert alert-info shadow-lg">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current flex-shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span><%= el.msg %></span>
+        </div>
+      </div>
       <% }) %> <% } %>
       <form action="/login" method="POST">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
+        <div class="">
+          <label for="exampleInputEmail1" class=""
             >Email address</label
           >
           <input
             type="email"
-            class="form-control"
+            class="input input-bordered input-secondary w-full max-w-xs"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             name="email"
           />
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
+        <div class="">
+          <label for="exampleInputPassword1" class="">Password</label>
           <input
             type="password"
-            class="form-control"
+            class="input input-bordered input-secondary w-full max-w-xs"
             id="exampleInputPassword1"
             name="password"
           />
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <br>
+        <button type="submit" class="btn btn-secondary">Submit</button>
       </form>
     </section>
+  
   </div>
-</main>
 
 <%- include('partials/footer') -%>
