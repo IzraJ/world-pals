@@ -9,10 +9,10 @@ const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
 const cloudinary = require('cloudinary')
-
+// Route Variables
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
-// const commentRoutes = require("./routes/comments")
+const commentRoutes = require("./routes/comments")
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -60,6 +60,7 @@ app.use(flash());
 
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
+app.use("/comment", commentRoutes)
 
 
 // app.use("/comment", commentRoutes)

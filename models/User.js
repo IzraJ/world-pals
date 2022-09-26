@@ -6,7 +6,8 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: String,
   student: Boolean,
-  teacherid: String
+  teacherid: String,
+  class: String,
 });
 
 // Password hash middleware.
