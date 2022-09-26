@@ -1,10 +1,11 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row justify-content-center mt-5">
+<div class="flex justify-center">
+  <div class="">
     <div class="col-6">
-      <h2><%= post.title %></h2>
+      <h2 class="text-center text-7xl"><%= post.title %></h2>
+      <br>
       <img class="img-fluid" src="<%= post.image%>" />
-      <div class="row justify-content-between">
+      <div class="flex justify-around">
         <form
           class="col-1"
           action="/post/likePost/<%= post.id %>?_method=PUT"

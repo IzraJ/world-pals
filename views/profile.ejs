@@ -2,9 +2,9 @@
     <div class="grid grid-cols-3 gap-4">
 
         <!-- Feed -->
-        <div class="bg-red-500 text-white h-24 col-span-2 row-span-2 h-full flex">
+        <div class="text-white col-span-2 row-span-2 h-96 flex flex-wrap overflow-auto">
             <% for(var i=0; i<posts.length; i++) {%>
-            <div class="card w-48 bg-base-100 shadow-xl">
+            <div class="card w-48 h-96 bg-base-100 shadow-xl">
                 <figure>
                     <a href="/post/<%= posts[i]._id%>">
                     <img class="object-cover w-48 h-48" src="<%= posts[i].image%>" alt="" />
@@ -17,7 +17,7 @@
               </div>
               <% } %>
                 
-                <a class="btn btn-primary" href="/feed">Return to Feed</a>
+                
 
             <!-- <ul class="row list-unstyled">
                 <% for(var i=0; i<posts.length; i++) {%>
@@ -33,11 +33,19 @@
         </div>
 
 
-        
-        
             
-             <!-- Students List -->
-             <div class="bg-blue-500 text-white ">
+             <!-- User Info-->
+             <div class=" text-black ">
+
+                <p><strong>User Name</strong>: <%= user.userName %></p>
+                <p><strong>Email</strong>: <%= user.email %></p>
+                <a class="btn btn-primary" href="/feed">Return to Feed</a>
+                <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+                
+             </div>
+
+            <!-- Students-->
+             <div class=" text-black">
 
                 <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
                     <div class="collapse-title text-xl font-medium text-black">
@@ -50,16 +58,14 @@
                             </li>
                         <% } %>
                     </div>
-                  </div>
 
+                    <a href="/signupStudent" class="col-3 btn btn-primary"> Add student</a>
 
-
-                
-                <a href="/signupStudent" class="col-3 btn btn-primary"> Add student</a>
              </div>
 
-            <!-- Add Post -->
-             <div class="bg-yellow-500 text-white row-span-2 h-full">
+             <!--Profile posts -->
+             <div class=" text-black">
+
                 <h2>Add a post</h2>
                 <form action="/post/createPost" enctype="multipart/form-data" method="POST">
                 <div class="mb-3">
@@ -76,17 +82,11 @@
                 </div>
                 <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
                 </form>
-             </div>
 
-             <!--Profile posts -->
-             <div class="bg-purple-500 text-white h-24">
-                <p><strong>User Name</strong>: <%= user.userName %></p>
-                <p><strong>Email</strong>: <%= user.email %></p>
-                <a href="/logout" class="col-3 btn btn-primary">Logout</a>
              </div>
         
       </div> 
       
-<%- include('partials/footer') -%>
+<!-- <%- include('partials/footer') -%> -->
 
 
