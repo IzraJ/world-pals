@@ -1,10 +1,12 @@
 <%- include('partials/header') -%>
+<div class="contaner">
+
     <div class="grid grid-cols-3 gap-4">
 
         <!-- Feed -->
-        <div class="text-white col-span-2 row-span-2 h-96 flex flex-wrap overflow-auto">
+        <div class=" bg-red-500 text-white col-span-2 row-span-4 h-108 gap-4 px-4 py-4 flex flex-wrap justify-center overflow-y-auto">
             <% for(var i=0; i<posts.length; i++) {%>
-            <div class="card w-48 h-96 bg-base-100 shadow-xl">
+            <div class="card w-48 h-98 bg-base-100 shadow-xl">
                 <figure>
                     <a href="/post/<%= posts[i]._id%>">
                     <img class="object-cover w-48 h-48" src="<%= posts[i].image%>" alt="" />
@@ -16,26 +18,10 @@
                 </div>
               </div>
               <% } %>
-                
-                
-
-            <!-- <ul class="row list-unstyled">
-                <% for(var i=0; i<posts.length; i++) {%>
-                <li class="col-6 justify-content-between">
-                    <a href="/post/<%= posts[i]._id%>">
-                    <img class="object-scale-down h-48 w-96 ..." src="<%= posts[i].image%>">
-                    </a>
-                </li>
-                <% } %>
-                </ul>
-                <a class="btn btn-primary" href="/feed">Return to Feed</a> -->
-            
         </div>
 
-
-            
-             <!-- User Info-->
-             <div class=" text-black ">
+            <!-- User Info-->
+            <div class=" bg-yellow-500 text-black row-span-0 ">
 
                 <p><strong>User Name</strong>: <%= user.userName %></p>
                 <p><strong>Email</strong>: <%= user.email %></p>
@@ -45,7 +31,7 @@
              </div>
 
             <!-- Students-->
-             <div class=" text-black">
+             <div class=" bg-blue-500 text-black">
 
                 <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
                     <div class="collapse-title text-xl font-medium text-black">
@@ -60,11 +46,24 @@
                     </div>
 
                     <a href="/signupStudent" class="col-3 btn btn-primary"> Add student</a>
+                </div>
+             </div>
 
+             <!-- Classroom Search and List -->
+             <div>
+                <h3>Search ClassRooms</h3>
+                <form action="/class/searchClass" enctype="multipart/form-data" method="POST">
+                    <div class="mb-3">
+                        <input type="text" placeholder="Search Classrooms" class="input input-bordered input-secondary w-full max-w-xs" id="title" name="title"c/>
+                    </div>
+                    
+                </form>
+                
+                <h3>Connected ClassRooms</h3>
              </div>
 
              <!--Profile posts -->
-             <div class=" text-black">
+             <div class=" bg-purple-500 text-black">
 
                 <h2>Add a post</h2>
                 <form action="/post/createPost" enctype="multipart/form-data" method="POST">
@@ -84,9 +83,11 @@
                 </form>
 
              </div>
+             
         
-      </div> 
+      </div>
+ </div> 
       
-<!-- <%- include('partials/footer') -%> -->
+<%- include('partials/footer') -%>
 
 

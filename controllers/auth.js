@@ -203,7 +203,8 @@ exports.postSignupStudent = (req, res, next) => {
     email: req.body.email,
     password: req.body.password,
     student: true,
-    teacherid: req.user.id
+    teacherid: req.user.id,
+    class: req.body.class
   });
 
   User.findOne(
