@@ -1,12 +1,13 @@
 <%- include('partials/header') -%>
-<div class="contaner">
+<div class="contaner bg-gradient-to-r from-primary to-transparent">
 
-    <div class="grid grid-cols-3 gap-4">
+    <div class="md:grid grid-cols-3 gap-4">
 
-        <!-- Feed -->
-        <div class=" bg-red-500 text-white col-span-2 row-span-4 h-108 gap-4 px-4 py-4 flex flex-wrap justify-center overflow-y-auto">
+        <!-- Personal Feed -->
+        <div class="text-white col-span-2 row-span-4 h-96 gap-4 px-4 py-4 flex flex-wrap justify-center overflow-auto">
+            
             <% for(var i=0; i<posts.length; i++) {%>
-            <div class="card w-48 h-98 bg-base-100 shadow-xl">
+            <div class="card w-48 h-98 bg-base-100 shadow-xl bg-gradient-to-b from-accent to-transparent ...">
                 <figure>
                     <a href="/post/<%= posts[i]._id%>">
                     <img class="object-cover w-48 h-48" src="<%= posts[i].image%>" alt="" />
@@ -14,14 +15,16 @@
                 </figure>
                 <div class="card-body">
                   <h2 class="card-title text-black"><%= posts[i].title%></h2>
-                  <p class="text-black"><%= posts[i].caption%></p>
+                  <p class="text-black truncate ..."><%= posts[i].caption%></p>
                 </div>
               </div>
               <% } %>
+            
         </div>
+        
 
             <!-- User Info-->
-            <div class=" bg-yellow-500 text-black row-span-0 ">
+            <div class=" text-black row-span-0 ">
 
                 <p><strong>User Name</strong>: <%= user.userName %></p>
                 <p><strong>Email</strong>: <%= user.email %></p>
@@ -31,7 +34,7 @@
              </div>
 
             <!-- Students-->
-             <div class=" bg-blue-500 text-black">
+             <div class=" text-black">
 
                 <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
                     <div class="collapse-title text-xl font-medium text-black">
@@ -50,10 +53,12 @@
              </div>
 
              <!-- Classroom Search and List -->
-             <div>
-                <h3>Search ClassRooms</h3>
+             <div class="flex flex-wrap justify-center overflow-auto">
+                
                 <form action="/class/searchClass" enctype="multipart/form-data" method="POST">
+                    
                     <div class="mb-3">
+                        <h3>Search ClassRooms</h3>
                         <input type="text" placeholder="Search Classrooms" class="input input-bordered input-secondary w-full max-w-xs" id="title" name="title"c/>
                     </div>
                     
@@ -62,22 +67,21 @@
                 <h3>Connected ClassRooms</h3>
              </div>
 
-             <!--Profile posts -->
-             <div class=" bg-purple-500 text-black">
-
-                <h2>Add a post</h2>
+             <!--Add posts -->
+             <div class=" col-span-3 h-84 flex justify-center text-black">
+                
                 <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+                    <h2>Add a post</h2>
                 <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control text-black" id="title" name="title">
+                    <input type="text" placeholder="Title" class="input input-bordered input-secondary w-full max-w-xs" id="title" name="title" />
                 </div>
                 <div class="mb-3">
-                    <label for="caption" class="form-label">Caption</label>
-                    <textarea class="form-control text-black" id="caption" name="caption"></textarea>
+                    <textarea class="textarea textarea-secondary" placeholder="Caption" id="caption" name="caption"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="imgUpload" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="imageUpload" name="file">
+                    <!-- <label for="imgUpload" class="form-label">Image</label> -->
+                    <input type="file" placeholder="Title" class="input form-control input-bordered input-secondary h-full w-full max-w-xs" id="imageUpload" name="file" />
+                    <!-- <input type="file" class="form-control" id="imageUpload" name="file"> -->
                 </div>
                 <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
                 </form>
