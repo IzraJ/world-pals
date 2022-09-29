@@ -11,9 +11,11 @@ module.exports = {
         const posts = await Post.find({ user: req.user.id });
       res.render("profileStudents.ejs",{ posts: posts, user: req.user})
       }
+      const friends = await User.find().populate('friends');
+      const classroom = await User.find({class: req.user.id})
       const students = await User.find({teacherid: req.user.id})
       const posts = await Post.find({ user: req.user.id });
-      res.render("profile.ejs",{ posts: posts, user: req.user, students: students})
+      res.render("profile.ejs",{ posts: posts, user: req.user, students: students, classroom: classroom, friends: friends})
     } catch (err) {
       console.log(err);
     }
@@ -43,6 +45,27 @@ module.exports = {
       res.render("post.ejs", { post: post, user: req.user, comments: comments });
     } catch (err) {
       console.log(err);
+    }
+  },
+  // Need to work on this
+  // getFriends: async(req,res) => {
+  //   try{
+  //     const friends = await User.find().populate('friends').exec(...);
+  //     res.render()
+  //   } catch(err){
+  //     console.log(err)
+  //   }
+  // },
+  // Need work on this
+  addFriend: async(req,res) => {
+    try{
+      // req.body something 
+      const newFriend = req.body.id
+      const user = req.user
+
+      await user.friends.push(newFriend._id);
+    } catch(err){
+      console.log(err)
     }
   },
   createPost: async (req, res) => {
