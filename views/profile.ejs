@@ -43,7 +43,8 @@
                     <div class="collapse-content"> 
                         <% for(var i=0; i<students.length; i++) {%>
                             <li class="text-black">
-                                Student: <%= students[i].userName%> Classroom: <%= students[i].classroom%>`
+                                <!-- Need to figure out the anchor tag get request -->
+                                Student: <a href="/profile/<%= students[i]._id%>"><%= students[i].userName%></a> Classroom: <%= students[i].classroom%>`
                             </li>
                         <% } %>
                     </div>

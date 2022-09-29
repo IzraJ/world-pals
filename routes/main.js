@@ -10,6 +10,9 @@ router.get("/", homeController.getIndex);
 // Teacher Profile
 router.get("/profile", ensureAuth, postsController.getProfile);
 router.get("/profileStudents", ensureAuth, postsController.getProfileStudents);
+router.get("/profile/:id", ensureAuth, postsController.getProfileOthers)
+// Add Friend
+router.put("/profile/addfriend/:id", postsController.addFriend)
 // Feed
 router.get("/feed", ensureAuth, postsController.getFeed);
 // Login Teacher

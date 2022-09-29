@@ -8,8 +8,8 @@ const UserSchema = new mongoose.Schema({
   student: Boolean,
   teacherid: String,
   classroom: Number,
-  friends: {type: mongoose.Schema.Types.ObjectId,
-  ref: "User"},
+  friends: [{type: mongoose.Schema.Types.ObjectId,
+  ref: "User"}],
 });
 
 // Password hash middleware.

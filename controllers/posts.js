@@ -29,6 +29,17 @@ module.exports = {
     }
   },
 
+  getProfileOthers: async (req,res) => {
+    try{
+      const user = await User.findById(req.params.id)
+      const posts = await Post.find({ user: req.params.id });
+      res.render("profileOthers.ejs",{user: user, posts: posts})
+      console.log(user)
+    } catch (err){
+    console.log(err);
+  }
+},
+
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
@@ -59,14 +70,20 @@ module.exports = {
   // Need work on this
   addFriend: async(req,res) => {
     try{
-      // req.body something 
-      const newFriend = req.body.id
+      
+      const newFriend = req.params.id
       const user = req.user
-
-      await user.friends.push(newFriend._id);
+      console.log(user.id)
+      console.log(newFriend)
+// 
+await User.findOneAndUpdate(
+  { _id: user.id }, 
+  { $push: { friends: newFriend  } },
+)
     } catch(err){
       console.log(err)
     }
+    res.redirect(`/profile/${req.params.id}`);
   },
   createPost: async (req, res) => {
     try {
