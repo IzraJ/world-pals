@@ -1,6 +1,7 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
+const Classroom = require("../models/Classroom")
 
 
 exports.getLogin = (req, res) => {
@@ -234,4 +235,28 @@ exports.postSignupStudent = (req, res, next) => {
       });
     }
   );
+};
+
+exports.getClassroom = async (req, res) => {
+  try {
+    const classroom = await Classroom.find({teacherid: req.user.id})
+    res.render("classroom.ejs",{ user: req.user, classroom: classroom})
+    
+  } catch (err) {
+    console.log(err);
+  }
+  
+};
+
+exports.createClassroom = async (req, res) => {
+  try {
+    await Classroom.create({
+      className: req.body.className,
+      teacherid: req.user.id
+    });
+    console.log("Classroom Created");
+    res.redirect("/classroom");
+  } catch (err) {
+    console.log(err);
+  }
 };

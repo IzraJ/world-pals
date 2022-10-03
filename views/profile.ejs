@@ -54,7 +54,7 @@
              </div>
 
              <!-- Classroom Search and List -->
-             <div class="flex flex-nowrap justify-center overflow-auto">
+             <div class="flex justify-center overflow-auto">
                 
                 <form action="/class/searchClass" enctype="multipart/form-data" method="POST">
                     
@@ -65,12 +65,8 @@
                     
                 </form>
                 
-                <h3>Connected ClassRooms</h3>
-                <% for(var i=0; i<classroom.length; i++) {%>
-                    <li class="text-black">
-                        <%= classroom[i].userName%>
-                    </li>
-                <% } %>
+            
+                <a href="/classroom">Classrooms</a>
              </div>
 
              <!--Add posts -->

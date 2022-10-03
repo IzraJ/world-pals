@@ -15,6 +15,10 @@ router.get("/profile/:id", ensureAuth, postsController.getProfileOthers)
 router.put("/profile/addfriend/:id", postsController.addFriend)
 // Feed
 router.get("/feed", ensureAuth, postsController.getFeed);
+// Classroom Dashboard
+router.get("/classroom", authController.getClassroom);
+// Classroom Create
+router.post('/classroom/create',authController.createClassroom);
 // Login Teacher
 router.get("/login", authController.getLogin);
 router.post("/login", authController.postLogin);

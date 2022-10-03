@@ -1,0 +1,36 @@
+<%- include('partials/header') -%>
+<main class="container">
+
+  <!-- Create Classroom -->
+  <div class="flex justify-center">
+      <section class="col-6 mt-5">
+          <h1>Create Classroom</h1>
+          <form action="/classroom/create" method="POST">
+              <div class="mb-3">
+                <label for="classroom" class="form-label">Class Name</label>
+                <input type="text" class="form-control" id="className" name="className">
+              </div>
+              
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+      </section>
+  </div>
+
+  <!-- List of Classrooms -->
+  <h1>Classroom List</h1>
+  <div class="flex">
+    <% for(var i=0; i<classroom.length; i++) {%>
+    <div class="card w-96 bg-base-100 shadow-xl">
+      <p><%= classroom[i].className%></p>
+      <figure class="px-10 pt-10">
+      </a>
+      </figure>
+      
+    </div>
+    <% } %>
+    
+    </div>
+
+</main>
+
+<%- include('partials/footer') -%>
