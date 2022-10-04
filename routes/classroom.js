@@ -15,6 +15,6 @@ router.post('/create',classroomController.createClassroom);
 // Classroom Profile
 router.get("/:id",ensureAuth,classroomController.getClassroomProfile)
 // Classroom SignUp Student
-router.get("/:id/signupStudent",ensureAuth, authController.getSignupStudent)
 
+router.post("/:id/signupStudent", authController.postSignupStudent);
 module.exports = router;
