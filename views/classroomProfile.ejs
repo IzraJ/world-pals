@@ -1,52 +1,37 @@
 <%- include('partials/header') -%>
 
  
-  <div class=" text-black">
-
-<!-- I need to figure out how to get the array of students from the Classroom Schema -->
-        <div class="collapse-content"> 
-            <% for(var i=0; i<student.length; i++) {%>
+<main class="flex flex-wrap">
+        <div class="col 1">
+          <h2>List of Students</h2>
+            <% for(var i=0; i<students.length; i++) {%>
                 <li class="text-black">
-                     <a href="/profile/<%= classroom.students[i]._id%>"><%= classroom.students[i]%></a>
+                  <form class="col-1"
+                  action="/classroom/<%= id%>/addstudent/<%= students[i]._id %>?_method=PUT"
+                  method="POST">
+                
+                    <a href="/profile/<%= students[i]._id%>"><%= students[i].userName%></a>
+                    <button class="btn btn-primary fa fa-plus" type="submit"></button>
+
+                  </form>
+                     
                 </li>
+
             <% } %>
         </div>
-        <!-- Signup Student Post -->
-        <div class="flex justify-center">
-          <section class="col-6 mt-5">
-              <% if (locals.messages.errors) { %>
-                  <% messages.errors.forEach( el => { %>
-                      <div class="alert alert-danger"><%= el.msg %></div>
-                  <% }) %>    
-              <% } %>
-              <% if (locals.messages.info) { %>
-                  <% messages.info.forEach( el => { %>
-                      <div class="alert alert-info"><%= el.msg %></div>
-                  <% }) %>    
-              <% } %>
-              <form action="/classroom/<%= classroom._id%>/signupStudent" method="POST">
+        <!-- List of Students in this Class -->
+        <div class="col 1">
+          <h2>List of Students In This Class</h2>
+            <% for(var i=0; i<addedStudents.length; i++) {%>
+                <li class="text-black">
                   
-                  <div class="mb-3">
-                      <label for="userName" class="form-label">User Name</label>
-                      <input type="text" class="form-control" id="userName" name="userName">
-                    </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                  </div>
-                  <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
-                  </div>
-                  <div class="mb-3">
-                      <label for="confirmPassword" class="form-label">Confirm Password</label>
-                      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
-                    </div>
-                  <button type="submit" class="btn btn-primary">Add Student</button>
-                </form>
-          </section>
-      </div>
-   
+                
+                    <a href="/profile/<%= addedStudents[i]._id%>"><%= addedStudents[i].userName%></a>
+                    
+            
+                     
+                </li>
 
-</div>
+            <% } %>
+        </div>
+      </main>

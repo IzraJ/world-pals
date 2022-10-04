@@ -7,8 +7,9 @@ module.exports = {
 
     getClassroom: async (req, res) => {
         try {
+      const students = await User.find({teacherid: req.user.id})
       const classroom = await Classroom.find({teacherid: req.user.id})
-      res.render("classroom.ejs",{ user: req.user, classroom: classroom})
+      res.render("classroom.ejs",{ user: req.user, classroom: classroom, students: students})
       
         } catch (err) {
       console.log(err);
@@ -32,17 +33,38 @@ module.exports = {
   
     getClassroomProfile: async (req, res) => {
         try {
-        
-        const classroom = await Classroom.find({teacherid: req.user.id})
-        const student = await User.find({classroomid: req.params.id})
+        const addedStudents = await User.find({classroomid:req.params.id})
+        const classroom = await Classroom.find({_id: req.params.id})
+        const students = await User.find({teacherid: req.user.id})
         const id = req.params.id
-        res.render("classroomProfile.ejs",{ user: req.user, classroom: classroom, student: student, id: id})
+        res.render("classroomProfile.ejs",{ user: req.user, classroom: classroom, students: students, id: id, addedStudents: addedStudents})
         
         } catch (err) {
         console.log(err);
         }
     },
 
+    addStudent: async (req,res) => {
+      try{
+      const classroom = req.params.classid
+      const student = req.params.id
+      const user = req.user.id
+      console.log(user.id)
+      console.log("Succesfully added new friend")
+// 
+      await Classroom.findOneAndUpdate(
+      { _id: classroom }, 
+      { classroomid: classroom },
+      ) 
+      await User.findOneAndUpdate(
+        {_id: student},
+        {}
+      )  
+      }catch(err){
+        console.log(err);
+      }
+      res.redirect(`/classroom/${req.params.classid}`);
+    },
 
 
 }

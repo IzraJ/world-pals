@@ -204,7 +204,7 @@ exports.postSignupStudent = (req, res, next) => {
     password: req.body.password,
     student: true,
     teacherid: req.user.id,
-    classroomid: req.params.id
+    classroomid: req.body.classroomid
   });
 
   User.findOne(
@@ -217,13 +217,13 @@ exports.postSignupStudent = (req, res, next) => {
         req.flash("errors", {
           msg: "Account with that email address or username already exists.",
         });
-        return res.redirect("../signupStudent");
+        return res.redirect("../classroom");
       }
       user.save((err) => {
         if (err) {
           return next(err);
         }
-        res.redirect("/profile")
+        res.redirect("/classroom")
         // commenting this out works sometimes
         // req.logIn(user, (err) => {
         //   if (err) {

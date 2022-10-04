@@ -18,3 +18,6 @@ router.get("/:id",ensureAuth,classroomController.getClassroomProfile)
 
 router.post("/:id/signupStudent", authController.postSignupStudent);
 module.exports = router;
+
+// Classroom PUT updateClassroom
+router.put("/:classid/addstudent/:id", classroomController.addStudent);
