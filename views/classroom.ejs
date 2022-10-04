@@ -21,10 +21,9 @@
   <div class="flex">
     <% for(var i=0; i<classroom.length; i++) {%>
     <div class="card w-96 bg-base-100 shadow-xl">
-      <p><%= classroom[i].className%></p>
-      <figure class="px-10 pt-10">
-      </a>
-      </figure>
+      <a href="/classroom/<%= classroom[i]._id%>"><p><%= classroom[i].className%></p></a>
+      
+      
       
     </div>
     <% } %>

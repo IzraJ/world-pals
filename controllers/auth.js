@@ -3,10 +3,9 @@ const validator = require("validator");
 const User = require("../models/User");
 const Classroom = require("../models/Classroom")
 
-
 exports.getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect("/profile");
+    return res.redirect("/profile")
   }
   res.render("login", {
     title: "Login",
@@ -122,7 +121,7 @@ exports.getSignupTeacher = (req, res) => {
 exports.getSignupStudent = (req, res) => {
   
   res.render("signupStudent", {
-    title: "Create Account",
+   title: "Create Account",
   });
 };
 
@@ -205,7 +204,7 @@ exports.postSignupStudent = (req, res, next) => {
     password: req.body.password,
     student: true,
     teacherid: req.user.id,
-    classroom: req.body.classroom
+    classroomid: req.params.id
   });
 
   User.findOne(
@@ -235,28 +234,4 @@ exports.postSignupStudent = (req, res, next) => {
       });
     }
   );
-};
-
-exports.getClassroom = async (req, res) => {
-  try {
-    const classroom = await Classroom.find({teacherid: req.user.id})
-    res.render("classroom.ejs",{ user: req.user, classroom: classroom})
-    
-  } catch (err) {
-    console.log(err);
-  }
-  
-};
-
-exports.createClassroom = async (req, res) => {
-  try {
-    await Classroom.create({
-      className: req.body.className,
-      teacherid: req.user.id
-    });
-    console.log("Classroom Created");
-    res.redirect("/classroom");
-  } catch (err) {
-    console.log(err);
-  }
 };

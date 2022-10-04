@@ -7,8 +7,7 @@ const UserSchema = new mongoose.Schema({
   password: String,
   student: Boolean,
   teacherid: String,
-  classroom: [{type:mongoose.Schema.Types.ObjectId,
-  ref: "Classroom"}],
+  classroomid: String,
   friends: [{type: mongoose.Schema.Types.ObjectId,
   ref: "User"}],
 });
