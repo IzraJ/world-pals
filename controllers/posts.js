@@ -22,7 +22,7 @@ module.exports = {
   },
   getProfileStudents: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
+      const posts = await Post.find({ classroomId: req.user.classroomid });
       res.render("profileStudents.ejs",{ posts: posts, user: req.user})
     } catch (err) {
       console.log(err);
@@ -48,6 +48,9 @@ module.exports = {
       console.log(err);
     }
   },
+
+  
+
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
@@ -97,7 +100,8 @@ await User.findOneAndUpdate(
         caption: req.body.caption,
         likes: 0,
         user: req.user.id,
-        userName: req.user.userName
+        userName: req.user.userName,
+        classroomId: req.user.classroomid
       });
       console.log("Post has been added!");
       res.redirect("/profile");

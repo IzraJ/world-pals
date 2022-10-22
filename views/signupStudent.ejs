@@ -14,13 +14,14 @@
                         <div class="alert alert-info"><%= el.msg %></div>
                     <% }) %>    
                 <% } %>
+
                 <form action="/signupStudent" method="POST">
-                  <select class="select select-secondary w-full max-w-xs">
-                    <option class="text-black" disabled selected>Select Which Class</option>
+                  <label for="classroomid">Select an Option</label>
+                  <select class="select select-secondary w-full max-w-xs" id="classroomid" name="classroomid">
+                    <option disabled selected>Select Which Class</option>
                     <% for(var i=0; i<classroom.length; i++) {%>
-                      <option value="<%= classroom[i]._id%>"></option>
-                        <%= classroom[i].className%>
-                           
+                      <option value="<%= classroom[i]._id%>"><%= classroom[i].className%></option>
+                     
                       </option>
       
                   <% } %>

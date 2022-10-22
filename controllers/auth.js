@@ -185,6 +185,7 @@ exports.postSignupTeacher = (req, res, next) => {
 };
 
 exports.postSignupStudent = (req, res, next) => {
+  console.log(req)
   const validationErrors = [];
   if (!validator.isEmail(req.body.email))
     validationErrors.push({ msg: "Please enter a valid email address." });

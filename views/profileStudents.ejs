@@ -8,6 +8,35 @@
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
 
+
+
+
+          <!-- Feed -->
+
+          <div class="flex">
+            <% for(var i=0; i<posts.length; i++) {%>
+            <div class="card w-96 bg-base-100 shadow-xl">
+              <p><%= posts[i].user%></p>
+              <figure class="px-10 pt-10">
+                <a href="/post/<%= posts[i]._id%>">
+                <img src="<%= posts[i].image%>" alt="Shoes" class="rounded-xl" />
+              </a>
+              </figure>
+              <div class="card-body items-center text-center">
+                <h2 class="card-title"><%= posts[i].title%></h2>
+                <p class="truncate ..."><%= posts[i].caption%></p>
+                <div class="card-actions">
+                  <button class="btn btn-primary">Comment</button>
+                </div>
+              </div>
+            </div>
+            <% } %>
+            
+            </div>
+
+
+          <!-- add Post -->
+
           
           <div class="mt-5">
             <h2>Add a post</h2>
@@ -28,6 +57,7 @@
             </form>
           </div>
       </div>
+
       <div class="col-6">
         <ul class="row list-unstyled">
         <% for(var i=0; i<posts.length; i++) {%>

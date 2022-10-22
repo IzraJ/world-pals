@@ -1,6 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Classroom = require("../models/Classroom");
 const User = require("../models/User");
+const Post = require("../models/Post")
 
 
 
@@ -10,12 +11,15 @@ module.exports = {
         try {
       const students = await User.find({teacherid: req.user.id})
       const classroom = await Classroom.find({teacherid: req.user.id})
+      
       res.render("classroom.ejs",{ user: req.user, classroom: classroom, students: students})
       
         } catch (err) {
       console.log(err);
         }
     },
+
+    
 
 
     createClassroom: async (req, res) => {
@@ -40,11 +44,13 @@ module.exports = {
   
     getClassroomProfile: async (req, res) => {
         try {
+          console.log(req.params.id)
+        const posts = await Post.find({classroomId:req.params.id});
         const addedStudents = await User.find({classroomid:req.params.id})
         const classroom = await Classroom.find({_id: req.params.id})
         const students = await User.find({teacherid: req.user.id})
         const id = req.params.id
-        res.render("classroomProfile.ejs",{ user: req.user, classroom: classroom, students: students, id: id, addedStudents: addedStudents})
+        res.render("classroomProfile.ejs",{ user: req.user, classroom: classroom, students: students, id: id, addedStudents: addedStudents, posts:posts})
         
         } catch (err) {
         console.log(err);
