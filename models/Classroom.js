@@ -11,6 +11,15 @@ const ClassroomSchema = new mongoose.Schema({
   students: [{type: mongoose.Schema.Types.ObjectId,
   ref: "User"}],
   
+  image: {
+    type: String,
+    require: true,
+  },
+  cloudinaryId: {
+    type: String,
+    require: true,
+  },
+  
 });
 
 

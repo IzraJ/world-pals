@@ -1,6 +1,7 @@
+const cloudinary = require("../middleware/cloudinary");
+const Classroom = require("../models/Classroom");
+const User = require("../models/User");
 
-const Classroom = require("../models/Classroom")
-const User = require("../models/User")
 
 
 module.exports = {
@@ -19,14 +20,20 @@ module.exports = {
 
     createClassroom: async (req, res) => {
         try {
+        
+        const result = await cloudinary.uploader.upload(req.file.path);
+          
         await Classroom.create({
          className: req.body.className,
-         teacherid: req.user.id
+         teacherid: req.user.id,
+         image: result.secure_url,
+         cloudinaryId: result.public_id,
         });
          console.log("Classroom Created");
          res.redirect("/classroom");
         } catch (err) {
         console.log(err);
+        console.log(req)
         }
     },
   

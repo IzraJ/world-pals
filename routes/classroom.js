@@ -8,10 +8,11 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 
 
+
 // Classroom Dashboard
 router.get("/", classroomController.getClassroom);
 // Classroom Create
-router.post('/create',classroomController.createClassroom);
+router.post('/create',upload.single("file"), classroomController.createClassroom);
 // Classroom Profile
 router.get("/:id",ensureAuth,classroomController.getClassroomProfile)
 

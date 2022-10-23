@@ -1,29 +1,42 @@
-<%- include('partials/header') -%>
-<main class="container">
+<%- include('partials/headerLoggedIn') -%>
+<main class="bg-base-200">
 
   <!-- Create Classroom -->
   <div class="flex justify-center">
       <section class="col-6 mt-5">
           <h1>Create Classroom</h1>
-          <form action="/classroom/create" method="POST">
+          <form action="/classroom/create" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
                 <label for="classroom" class="form-label">Class Name</label>
                 <input type="text" class="form-control" id="className" name="className">
               </div>
+
+              <div class="mb-3">
+                <label for="imgUpload" class="form-label">Image</label>
+                <input type="file" placeholder="Title" class="input form-control input-bordered input-secondary h-full w-full max-w-xs" id="imageUpload" name="file" />
+              </div>
               
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
             </form>
       </section>
   </div>
 
   <!-- List of Classrooms -->
-  <h1>Classroom List</h1>
-  <div class="flex">
+
+  <div class="flex-nowrap">
+    
     <% for(var i=0; i<classroom.length; i++) {%>
-    <div class="card w-96 bg-base-100 shadow-xl">
-      <a href="/classroom/<%= classroom[i]._id%>"><p><%= classroom[i].className%></p></a>
-      
-      
+
+
+      <div class="card w-96 bg-base-100 shadow-xl">
+        <figure><img src="<%= classroom[i].image%>" alt="Shoes" /></figure>
+        <div class="card-body">
+          <h2 class="card-title"><%= classroom[i].className%></h2>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary"><a href="/classroom/<%= classroom[i]._id%>">Enter Classroom</button>
+          </div>
+        </div>
+      </div>
       
     </div>
     <% } %>
