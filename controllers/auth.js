@@ -118,11 +118,16 @@ exports.getSignupTeacher = (req, res) => {
   });
 };
 
-exports.getSignupStudent = (req, res) => {
-  
+exports.getSignupStudent = async (req, res) => {
+  try{
+  const classroom = await Classroom.find({teacherid: req.user.id})
   res.render("signupStudent", {
+    classroom: classroom,
    title: "Create Account",
-  });
+  })}catch
+    (err) {
+      console.log(err);
+  }
 };
 
 exports.postSignupTeacher = (req, res, next) => {

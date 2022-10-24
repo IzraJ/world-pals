@@ -1,5 +1,7 @@
 <%- include('partials/header') -%>
     <main class="container">
+      
+      
         <div class="flex justify-center">
             <section class="col-6 mt-5">
                 <% if (locals.messages.errors) { %>
@@ -13,7 +15,17 @@
                     <% }) %>    
                 <% } %>
                 <form action="/signupStudent" method="POST">
+                  <select class="select select-secondary w-full max-w-xs">
+                    <option class="text-black" disabled selected>Select Which Class</option>
+                    <% for(var i=0; i<classroom.length; i++) {%>
+                      <option value="<%= classroom[i]._id%>"></option>
+                        <%= classroom[i].className%>
+                           
+                      </option>
+      
+                  <% } %>
                     
+                  </select>
                     <div class="mb-3">
                         <label for="userName" class="form-label">User Name</label>
                         <input type="text" class="form-control" id="userName" name="userName">

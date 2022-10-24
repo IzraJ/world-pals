@@ -14,10 +14,12 @@ router.get("/", classroomController.getClassroom);
 router.post('/create',classroomController.createClassroom);
 // Classroom Profile
 router.get("/:id",ensureAuth,classroomController.getClassroomProfile)
-// Classroom SignUp Student
 
-router.post("/:id/signupStudent", authController.postSignupStudent);
-module.exports = router;
+
+
+
 
 // Classroom PUT updateClassroom
 router.put("/:classid/addstudent/:id", classroomController.addStudent);
+
+module.exports = router;

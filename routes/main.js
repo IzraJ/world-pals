@@ -27,7 +27,9 @@ router.get("/signup", authController.getSignup);
 // Signup Teacher
 router.get("/signupTeacher", authController.getSignupTeacher);
 router.post("/signupTeacher", authController.postSignupTeacher);
-
+// Signup Student
+router.get("/signupStudent",authController.getSignupStudent)
+router.post("/signupStudent", authController.postSignupStudent);
 // Logout
 router.get("/logout", authController.logout);
 

@@ -14,7 +14,7 @@ module.exports = {
       const friends = await User.find().populate('friends');
       const classroom = await User.find({class: req.user.id})
       const students = await User.find({teacherid: req.user.id})
-      const posts = await Post.find({ user: req.user.id });
+      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
       res.render("profile.ejs",{ posts: posts, user: req.user, students: students, classroom: classroom, friends: friends})
     } catch (err) {
       console.log(err);
@@ -97,6 +97,7 @@ await User.findOneAndUpdate(
         caption: req.body.caption,
         likes: 0,
         user: req.user.id,
+        userName: req.user.userName
       });
       console.log("Post has been added!");
       res.redirect("/profile");
