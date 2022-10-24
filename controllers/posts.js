@@ -1,7 +1,8 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 const User = require("../models/User")
-const Comment = require("../models/Comment")
+const Comment = require("../models/Comment");
+const Classroom = require("../models/Classroom");
 
 
 module.exports = {
@@ -20,12 +21,18 @@ module.exports = {
       console.log(err);
     }
   },
+
   getProfileStudents: async (req, res) => {
     try {
+      
+      
+      const classroom = await Classroom.findById(req.user.classroomid)
       const posts = await Post.find({ classroomId: req.user.classroomid });
-      res.render("profileStudents.ejs",{ posts: posts, user: req.user})
+      res.render("profileStudents.ejs",{ posts: posts, user: req.user, classroom: classroom})
     } catch (err) {
+      
       console.log(err);
+    
     }
   },
 
